@@ -1,0 +1,85 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>br.com.brigadeirostk</groupId>
+  <artifactId>brigadeiros-tk-web</artifactId>
+  <version>1.0.0</version>
+  <name>BrigadeirosTK Web</name>
+
+  <properties>
+    <java.version>22</java.version>
+    <maven.compiler.source>22</maven.compiler.source>
+    <maven.compiler.target>22</maven.compiler.target>
+    <spring-boot.version>3.2.0</spring-boot.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- app -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- testes (JUnit 5 já incluso aqui) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- precisa da versão explícita -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
+      </plugin>
+
+      <!-- Surefire compatível com Java 22 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <useModulePath>false</useModulePath>
+          <!-- garante que seus testes com final Test serão pegos -->
+          <includes>
+            <include>**/*Test.java</include>
+            <include>**/*Tests.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
